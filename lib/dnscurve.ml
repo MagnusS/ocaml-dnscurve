@@ -169,7 +169,7 @@ let encode_txt_query ?keyring ~id (sk,pk) server_pk zone buffer =
       ra = false;
       rcode = NoError;
     };
-    questions = [{ q_name; q_type = Q_TXT; q_class = Q_IN }];
+    questions = [{ q_name; q_type = Q_TXT; q_class = Q_IN; q_unicast = QU }];
     answers = []; authorities = []; additionals = [];
   })
 
@@ -239,6 +239,7 @@ let encode_txt_response ({ client_n; key }) query buffer =
                  cls = RR_IN;
                  ttl = 0_l;
                  rdata = TXT (List.rev !txts);
+	         flush = false
                }];
     authorities = []; additionals = [];
   })
